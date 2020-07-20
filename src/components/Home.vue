@@ -1,23 +1,69 @@
 <template>
   <v-container fluid>
     <v-row align="center" justify="start">
-      <v-simple-table dark dense style="width: 300px; text-align: center">
-        <thead>
-          <tr style="background-color: blue">Blizzard Tracker</tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Link to Item</td>
-          </tr>
-        </tbody>
-      </v-simple-table>
+      <v-data-table
+        :headers="headers"
+        :items="bluePosts"
+        :items-per-page="5"
+        class="elevation-1 blueposts"
+        dark
+        dense
+        disable-sort
+        :hide-default-footer="true">
+        <template v-slot:item.id="{ item }">
+          <td>{{ item.title }}</td>
+        </template>
+      </v-data-table>
     </v-row>
   </v-container>
 </template>
 
 <script>
 const axios = require('axios');
+
 export default {
   name: 'Home',
+  data() {
+    return {
+      bluePosts: [],
+      headers: [
+        {
+          text: "Blizzard Posts",
+          align: "start",
+          value: "title"
+        }
+      ]
+    }
+  },
+  methods: {
+    getBluePosts() {
+      axios.get('http://localhost:3000/blue')
+      .then(response => {
+        this.bluePosts = response.data;
+        this.bluePosts = this.bluePosts.slice(0, 5)
+        console.log(this.bluePosts)
+    });
+    },
+    dateDifference(postDate) {
+      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+      console.log('hello')
+
+      const utc1 = Date.UTC(postDate.getFullYear(), postDate.getMonth(), postDate.getDate());
+      const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+      var test = Math.floor((utc2 - utc1) / _MS_PER_DAY);
+      console.log(test)
+    }
+  },
+  mounted() {
+    this.getBluePosts()
+  }
 }
 </script>
+
+<style>
+thead {
+  background-color: blue;
+}
+</style>
