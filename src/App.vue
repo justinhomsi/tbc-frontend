@@ -12,7 +12,7 @@
             <router-link to='/' style="text-decoration: none"><h1 style="color: green;">BC</h1></router-link>
           </v-col>
 
-          <v-col align-self="end">
+          <v-col align-self="center">
             <v-menu>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -27,7 +27,7 @@
             </v-menu>
           </v-col>
 
-          <v-col align-self="end">
+          <v-col align-self="center">
             <v-menu>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -42,7 +42,7 @@
             </v-menu>
           </v-col>
 
-          <v-col align-self="end">
+          <v-col align-self="center">
             <v-menu>
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -54,6 +54,38 @@
                 Guides
                 </v-btn>
               </template>
+            </v-menu>
+          </v-col>
+
+          <v-col align-self="center">
+            <v-menu
+              v-model="value"
+              :open-on-hover="true"
+              :close-on-click="true"
+              :close-on-content-click="true"
+              :offset-y="true"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-btn
+                  class="black--text"
+                  color="rgba(100, 100, 50, 1)"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                More
+                </v-btn>
+              </template>
+              <v-list dark shaped dense>
+                <v-list-item
+                  v-for="(item, index) in menuMore"
+                  :key="index"
+                  :click="handleClick"
+                  dark
+                  dense
+                >
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
             </v-menu>
           </v-col>
 
@@ -92,6 +124,10 @@ export default {
   data: () => ({
     searchParams: "",
     searchResults: null,
+    value: false,
+    menuMore: [
+      { title: 'Patch Notes '}
+    ]
   }),
 
   methods: {
@@ -100,6 +136,9 @@ export default {
         this.$router.push(`/search?q=${this.searchParams}`)
       }
       this.searchParams = ""
+    },
+    handleClick() {
+
     }
   }
 };
