@@ -16,7 +16,7 @@
             ></v-text-field>
           </v-card-title>
           <v-data-table
-            :headers="headers"
+            :headers="itemHeaders"
             :items='filteredItems'
             :items-per-page="10"
             :search="search"
@@ -30,8 +30,8 @@
               @update:options="updateOptions"
               items-per-page-text="$vuetify.dataTable.itemsPerPageText"/>
           </template>
-          <template v-slot:item.Title="{ item }">
-            <router-link :class="`router-link-${item.quality}`" :to="`/item=${item.id}/${item.Title}`">{{ item.Title }}</router-link>
+          <template v-slot:item.name="{ item }">
+            <router-link :class="`router-link-${item.Quality}`" :to="`/item=${item.entry}/${item.name}`">{{ item.name }}</router-link>
           </template>
         </v-data-table>
         </v-card>
@@ -51,7 +51,7 @@
           ></v-text-field>
           </v-card-title>
           <v-data-table
-            :headers="headers"
+            :headers="npcHeaders"
             :items='filteredCreatures'
             :items-per-page="10"
             :search="search"
@@ -65,8 +65,8 @@
               @update:options="updateOptions"
               items-per-page-text="$vuetify.dataTable.itemsPerPageText"/>
           </template>
-          <template v-slot:item.Title="{ item }">
-            <router-link class="npc" :to="`/npc=${item.id}/${item.Title}`">{{ item.Title }}</router-link>
+          <template v-slot:item.Name="{ item }">
+            <router-link class="npc" :to="`/npc=${item.Entry}/${item.Name}`">{{ item.Name }}</router-link>
           </template>
           </v-data-table>
         </v-card>
@@ -86,7 +86,7 @@
             ></v-text-field>
           </v-card-title>
           <v-data-table
-          :headers="headers"
+          :headers="questHeaders"
           :items='filteredQuests'
           :items-per-page="10"
           :search="search"
@@ -101,7 +101,7 @@
               items-per-page-text="$vuetify.dataTable.itemsPerPageText"/>
           </template>
           <template v-slot:item.Title="{ item }">
-            <router-link class="quest" :to="`/quest=${item.id}/${item.Title}`">{{ item.Title }}</router-link>
+            <router-link class="quest" :to="`/quest=${item.entry}/${item.Title}`">{{ item.Title }}</router-link>
           </template>
           </v-data-table>
         </v-card>
@@ -127,16 +127,29 @@ export default {
   },
   data() {
     return {
-      searchResults: {},
       filteredItems: [],
       filteredCreatures: [],
       filteredQuests: [],
       search: '',
-      headers: [
+      questHeaders: [
         {
           text: 'Name',
           align: 'start',
           value: 'Title'
+        },
+      ],
+      itemHeaders: [
+        {
+          text: 'Name',
+          align: 'start',
+          value: 'name'
+        },
+      ],
+      npcHeaders: [
+        {
+          text: 'Name',
+          align: 'start',
+          value: 'Name'
         },
       ]
     }
@@ -145,32 +158,11 @@ export default {
     getSearchResults() {
       axios.get(`http://localhost:3000/search?q=${this.$route.query.q}`)
         .then(response => {
-          this.searchResults=response.data
-          this.filterItems()
-          this.filterCreatures()
-          this.filterQuests()
+          console.log(response.data)
+          this.filteredItems = response.data.items;
+          this.filteredCreatures = response.data.creatures;
+          this.filteredQuests = response.data.quests;
         })
-    },
-    filterItems() {
-      this.searchResults.filter(obj => {
-        if(obj.type === 'item') {
-          this.filteredItems.push({ Title: obj.Title, id: obj.id, type: obj.type, quality: obj.quality })
-        }
-      });
-    },
-    filterCreatures() {
-      this.searchResults.filter(obj => {
-        if(obj.type === 'npc') {
-          this.filteredCreatures.push({ Title: obj.Title, id: obj.id, type: obj.type, quality: obj.quality })
-        }
-      })
-    },
-    filterQuests() {
-      this.searchResults.filter(obj => {
-        if(obj.type === 'quest') {
-          this.filteredQuests.push({ Title: obj.Title, id: obj.id, type: obj.type, quality: obj.quality })
-        }
-      })
     }
   },
   mounted() {

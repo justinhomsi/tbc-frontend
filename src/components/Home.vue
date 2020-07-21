@@ -39,7 +39,8 @@ export default {
     getBluePosts() {
       axios.get('http://localhost:3000/blue')
       .then(response => {
-        this.bluePosts = response.data;
+        this.bluePosts = response.data.rows;
+        this.bluePosts.sort(this.sortByDate);
         this.bluePosts = this.bluePosts.slice(0, 5)
         console.log(this.bluePosts)
     });
@@ -54,6 +55,9 @@ export default {
 
       var test = Math.floor((utc2 - utc1) / _MS_PER_DAY);
       console.log(test)
+    },
+    sortByDate(a, b) {
+      return new Date(b.created).getTime() - new Date(a.created).getTime();
     }
   },
   mounted() {
@@ -63,7 +67,7 @@ export default {
 </script>
 
 <style>
-thead {
+.blueposts thead {
   background-color: blue;
 }
 </style>
