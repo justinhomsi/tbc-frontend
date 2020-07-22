@@ -22,6 +22,7 @@
             :search="search"
             class="elevation-1"
             dark
+            :loading="isLoading"
           >
           <template v-slot:top="{ pagination, options, updateOptions }">
             <v-data-footer
@@ -31,7 +32,7 @@
               items-per-page-text="$vuetify.dataTable.itemsPerPageText"/>
           </template>
           <template v-slot:item.name="{ item }">
-            <router-link :class="`router-link-${item.Quality}`" :to="`/item=${item.entry}/${item.name}`">{{ item.name }}</router-link>
+            <router-link :class="`router-link-${item.Quality}`" :to="`/item=${item.entry}/${item.name}`">{{ item.name }} </router-link>
           </template>
         </v-data-table>
         </v-card>
@@ -57,6 +58,7 @@
             :search="search"
             class="elevation-1"
             dark
+            :loading="isLoading"
           >
           <template v-slot:top="{ pagination, options, updateOptions }">
             <v-data-footer
@@ -92,6 +94,7 @@
           :search="search"
           class="elevation-1"
           dark
+          :loading="isLoading"
           >
           <template v-slot:top="{ pagination, options, updateOptions }">
             <v-data-footer
@@ -137,12 +140,37 @@ export default {
           align: 'start',
           value: 'Title'
         },
+        {
+          text: 'Quest Level',
+          align: 'start',
+          value: 'QuestLevel'
+        },
+        {
+          text: 'Min. Level',
+          align: 'start',
+          value: 'MinLevel'
+        }
       ],
       itemHeaders: [
         {
           text: 'Name',
           align: 'start',
           value: 'name'
+        },
+        {
+          text: 'Item Level',
+          align: 'start',
+          value: 'ItemLevel'
+        },
+        {
+          text: 'Req. Level',
+          align: 'start',
+          value: 'RequiredLevel'
+        },
+        {
+          text: 'Type',
+          align: 'start',
+          value: 'class'
         },
       ],
       npcHeaders: [
@@ -151,18 +179,81 @@ export default {
           align: 'start',
           value: 'Name'
         },
-      ]
+        {
+          text: 'Sub Name',
+          align: 'start',
+          value: 'SubName'
+        },
+      ],
+      isLoading: true,
     }
   },
   methods: {
     getSearchResults() {
-      axios.get(`http://localhost:3000/search?q=${this.$route.query.q}`)
+      this.isLoading = true;
+      axios.get(`/search?q=${this.$route.query.q}`)
         .then(response => {
-          console.log(response.data)
           this.filteredItems = response.data.items;
+          this.filteredItems.forEach((el) => {el.class = this.determineItemType(el.class)})
           this.filteredCreatures = response.data.creatures;
           this.filteredQuests = response.data.quests;
+          this.isLoading = false;
         })
+    },
+    determineItemType(itemType) {
+      switch(itemType) {
+        case 0:
+          return 'Consumable'
+          break
+        case 1:
+          return 'Container'
+          break
+        case 2:
+          return 'Weapon'
+          break
+        case 3:
+          return 'Gem'
+          break
+        case 4:
+          return 'Armor'
+          break
+        case 5:
+          return 'Reagent'
+          break
+        case 6:
+          return 'Projectile'
+          break
+        case 7:
+          return 'Tradeskill'
+          break
+        case 8:
+          return 'Item Enhancement'
+          break
+        case 9:
+          return 'Recipe'
+          break
+        case 11:
+          return 'Quiver'
+          break
+        case 12:
+          return 'Quest Item'
+          break
+        case 13:
+          return 'Key'
+          break
+        case 15:
+          return 'Miscellaneous'
+          break
+        case 16:
+          return 'Glyph'
+          break
+        case 17:
+          return 'Battle Pets'
+          break
+        case 18:
+          return 'WoW Token'
+          break
+      }
     }
   },
   mounted() {

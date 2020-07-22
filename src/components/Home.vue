@@ -37,24 +37,20 @@ export default {
   },
   methods: {
     getBluePosts() {
-      axios.get('http://localhost:3000/blue')
+      axios.get('/blue')
       .then(response => {
         this.bluePosts = response.data.rows;
         this.bluePosts.sort(this.sortByDate);
         this.bluePosts = this.bluePosts.slice(0, 5)
-        console.log(this.bluePosts)
     });
     },
     dateDifference(postDate) {
       const _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-      console.log('hello')
-
       const utc1 = Date.UTC(postDate.getFullYear(), postDate.getMonth(), postDate.getDate());
       const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
-      var test = Math.floor((utc2 - utc1) / _MS_PER_DAY);
-      console.log(test)
+      return Math.floor((utc2 - utc1) / _MS_PER_DAY);
     },
     sortByDate(a, b) {
       return new Date(b.created).getTime() - new Date(a.created).getTime();
