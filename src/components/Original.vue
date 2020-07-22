@@ -1,5 +1,5 @@
 <template>
-  <p style="white-space: pre; color: darkgoldenrod" v-html="patchNotes">{{ this.patchNotes }}</p>
+  <p style="white-space: pre-wrap; color: darkgoldenrod" v-html="patchNotes">{{ this.patchNotes }}</p>
 </template>
 
 <script>
