@@ -75,7 +75,7 @@
                 More
                 </v-btn>
               </template>
-              <v-list dark shaped dense>
+              <v-list dark dense>
                 <v-list-item
                   v-for="(item, index) in menuMore"
                   :key="index"
