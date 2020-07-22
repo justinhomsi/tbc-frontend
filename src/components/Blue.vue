@@ -55,7 +55,7 @@ export default {
       return new Date(b.created).getTime() - new Date(a.created).getTime();
     },
     dateDifference(postDate) {
-      var now = new Date();
+      var now = new Date().getTime();
       var d = Math.abs(now - postDate) / 1000;
       var r = {};
       var s = {

@@ -79,9 +79,9 @@
                 <v-list-item
                   v-for="(item, index) in menuMore"
                   :key="index"
-                  :click="handleClick"
                   dark
                   dense
+                  :to="item.link"
                 >
                   <v-list-item-title>{{ item.title }}</v-list-item-title>
                 </v-list-item>
@@ -126,7 +126,14 @@ export default {
     searchResults: null,
     value: false,
     menuMore: [
-      { title: 'Patch Notes '}
+      { 
+        title: 'Patch Notes',
+        link: '/notes' 
+      },
+      { 
+        title: 'Blue Tracker',
+        link: '/blue' 
+      },
     ]
   }),
 
