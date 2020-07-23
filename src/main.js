@@ -5,6 +5,7 @@ import App from './App.vue';
 import Search from './components/Search.vue';
 import Home from './components/Home.vue';
 import Blue from './components/Blue.vue';
+import Notes from './components/Notes.vue';
 import Original from './components/Original.vue';
 
 Vue.use(VueRouter)
@@ -23,6 +24,10 @@ const router = new VueRouter({
     {
       path: '/blue',
       component: Blue
+    },
+    {
+      path: '/notes',
+      component: Notes
     },
     {
       path: '/notes/original',
