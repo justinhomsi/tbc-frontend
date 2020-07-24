@@ -13,7 +13,7 @@
     <thead><h2>Patch 2.3: The Gods of Zul'Aman</h2></thead>
       <NotesTable :data="notes_data.two_three"></NotesTable>
     <br />
-    <thead><h2>Patch 2.4: Fury of the Sunwelln</h2></thead>
+    <thead><h2>Patch 2.4: Fury of the Sunwell</h2></thead>
       <NotesTable :data="notes_data.two_four"></NotesTable>
   </div>
 </template>
