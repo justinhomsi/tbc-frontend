@@ -9,15 +9,14 @@ export default {
   name: 'Original',
   data() {
     return {
-      patchNotes: ""
+      patchNotes: "",
     }
   },
   methods: {
     getPatchNotes() {
-      axios.get('/notes/original/2_0_1')
+      axios.get(`/notes/original/${this.$route.params.version}`)
       .then(response => {
         this.patchNotes = response.data;
-        console.log(this.patchNotes)
       })
     }
   },

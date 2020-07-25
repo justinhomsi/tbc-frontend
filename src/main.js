@@ -30,7 +30,7 @@ const router = new VueRouter({
       component: Notes
     },
     {
-      path: '/notes/original',
+      path: '/notes/original/:version',
       component: Original
     }
   ]
