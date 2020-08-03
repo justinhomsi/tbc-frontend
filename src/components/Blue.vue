@@ -32,6 +32,11 @@ export default {
           value: 'user'
         },
         {
+          text: 'Forum',
+          align: 'start',
+          value: 'category'
+        },
+        {
           text: 'Date',
           align: 'start',
           value: 'created'
@@ -48,8 +53,31 @@ export default {
          this.bluePosts = response.data.rows
          this.bluePosts.sort(this.sortByDate)
          this.bluePosts.forEach((el) => {el.created = this.dateDifference(new Date(el.created))})
+         this.bluePosts.forEach((el) => [el.category = this.determineCategory(el.category)])
          this.isLoading = false;
     });
+    },
+    determineCategory(category) {
+      switch(category) {
+        case 12:
+          return 'Support'
+        case 14:
+          return 'Service Status'
+        case 171:
+          return 'General Discussion'
+        case 172:
+         return 'WoW Classic General Discussion'
+        case 173:
+          return 'Oceanic General Discussion'
+        case 199:
+         return 'Wow Classic Bug Report'
+        case 244:
+          return 'Shadowlands Beta General Discussion'
+        case 246:
+          return 'Shadowlands Beta Classes and Covenants'
+        case 249:
+          return 'Shadowlands Beta Dungeons and Raids'
+      }
     },
     sortByDate(a, b) {
       return new Date(b.created).getTime() - new Date(a.created).getTime();
