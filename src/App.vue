@@ -13,7 +13,12 @@
           </v-col>
 
           <v-col align-self="center">
-            <v-menu>
+            <v-menu
+              :open-on-hover="true"
+              :close-on-click="true"
+              :close-on-content-click="true"
+              :offset-y="true"
+            >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   class="black--text"
@@ -24,17 +29,34 @@
                 Database
                 </v-btn>
               </template>
+                <v-list dark dense>
+                  <v-list-item
+                    v-for="(item, index) in menuDatabase"
+                    :key="index"
+                    dark
+                    dense
+                    :to="item.link"
+                  >
+                  <v-list-item-title>{{ item.title }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
             </v-menu>
           </v-col>
 
           <v-col align-self="center">
-            <v-menu>
+            <v-menu
+              :open-on-hover="true"
+              :close-on-click="true"
+              :close-on-content-click="true"
+              :offset-y="true"
+            >
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
                   class="black--text"
                   color="rgba(100, 100, 50, 1)"
                   v-bind="attrs"
                   v-on="on"
+                  :to="'/tools'"
                 >
                 Tools
                 </v-btn>
@@ -50,6 +72,7 @@
                   color="rgba(100, 100, 50, 1)"
                   v-bind="attrs"
                   v-on="on"
+                  :to="'/guides'"
                 >
                 Guides
                 </v-btn>
@@ -59,7 +82,6 @@
 
           <v-col align-self="center">
             <v-menu
-              v-model="value"
               :open-on-hover="true"
               :close-on-click="true"
               :close-on-content-click="true"
@@ -134,6 +156,20 @@ export default {
         title: 'Blue Tracker',
         link: '/blue' 
       },
+    ],
+    menuDatabase: [
+      {
+        title: 'Items',
+        link: '/items'
+      },
+      {
+        title: 'Quests',
+        link: '/quests'
+      },
+      {
+        title: 'NPCs',
+        link: '/npcs'
+      }
     ]
   }),
 

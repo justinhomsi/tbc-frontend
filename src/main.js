@@ -8,6 +8,7 @@ import Blue from './components/Blue.vue';
 import Notes from './components/Notes.vue';
 import Original from './components/Original.vue';
 import NotFound from './components/NotFound.vue';
+import ComingSoon from './components/ComingSoon.vue';
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,26 @@ const router = new VueRouter({
     {
       path: '/notes/original/:version',
       component: Original
+    },
+    {
+      path: '/guides',
+      component: ComingSoon
+    },
+    {
+      path: '/tools',
+      component: ComingSoon
+    },
+    {
+      path: '/items',
+      component: ComingSoon
+    },
+    {
+      path: '/quests',
+      component: ComingSoon
+    },
+    {
+      path: '/npcs',
+      component: ComingSoon
     },
     {
       path: '*',
