@@ -7,6 +7,9 @@
    dark
    :loading="isLoading"
   >
+    <template v-slot:item.title="{ item }">
+      <a :href="createURL(item.url)" target="_blank">{{ item.title }}</a>
+    </template>
   </v-data-table>
 </template>
 
@@ -145,6 +148,9 @@ export default {
         }
       }
     },
+    createURL(url) {
+      return new URL('/en/wow' + url, "https://us.forums.blizzard.com/");
+    }
   },
   mounted() {
     this.getBluePosts()
