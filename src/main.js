@@ -7,6 +7,7 @@ import Home from './components/Home.vue';
 import Blue from './components/Blue.vue';
 import Notes from './components/Notes.vue';
 import Original from './components/Original.vue';
+import NotFound from './components/NotFound.vue';
 
 Vue.use(VueRouter)
 
@@ -32,6 +33,10 @@ const router = new VueRouter({
     {
       path: '/notes/original/:version',
       component: Original
+    },
+    {
+      path: '*',
+      component: NotFound
     }
   ]
 })
