@@ -290,4 +290,7 @@ tbody tr:nth-of-type(odd) {
 .quest, .quest:link, .quest:visited, .npc, .npc:link, .npc:visited {
   color: #fdef2f;
 }
+a {
+  text-decoration: none;
+}
 </style>
