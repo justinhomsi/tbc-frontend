@@ -8,7 +8,7 @@
    :loading="isLoading"
   >
     <template v-slot:item.title="{ item }">
-      <a :href="createURL(item.url)" target="_blank">{{ item.title }}</a>
+      <a :href="createURL(item.url)" target="_blank" :title="item.excerpt">{{ item.title }}</a>
     </template>
   </v-data-table>
 </template>
