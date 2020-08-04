@@ -1,25 +1,30 @@
 <template>
-  <v-data-table
-   :headers="headers"
-   :items='bluePosts'
-   :items-per-page="10"
-   class="elevation-1"
-   dark
-   :loading="isLoading"
-  >
-    <template v-slot:item.title="{ item }">
-      <a :href="createURL(item.url)" target="_blank" :title="item.excerpt">{{ item.title }}</a>
-    </template>
-  </v-data-table>
+  <div>
+    <VueTitle title="Untitled Project - Blue Tracker"></VueTitle>
+    <v-data-table
+     :headers="headers"
+     :items='bluePosts'
+     :items-per-page="10"
+     class="elevation-1"
+     dark
+     :loading="isLoading"
+    >
+      <template v-slot:item.title="{ item }">
+        <a :href="createURL(item.url)" target="_blank" :title="item.excerpt">{{ item.title }}</a>
+      </template>
+    </v-data-table>
+  </div>
 </template>
 
 <script>
+import VueTitle from './VueTitle.vue';
 const axios = require('axios');
-
-
 
 export default {
   name: 'Blue',
+  components: {
+    VueTitle
+  },
   data() {
     return {
       bluePosts: [],

@@ -1,5 +1,6 @@
 <template>
   <div class="notfound">
+    <VueTitle title="404 Not Found"></VueTitle>
     <h1>404</h1>
     <h1>Page Not Found</h1>
     <br />
@@ -8,8 +9,13 @@
 </template>
 
 <script>
+import VueTitle from './VueTitle.vue';
+
 export default {
   name: 'NotFound',
+  components: {
+    VueTitle
+  },
   data() {
     return {
     } 

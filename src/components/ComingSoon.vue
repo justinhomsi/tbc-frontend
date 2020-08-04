@@ -1,5 +1,6 @@
 <template>
   <div class="comingsoon">
+    <VueTitle title="Untitled Project - Coming Soon"></VueTitle>
     <h1>Coming Soon!</h1>
     <p>This page is still in development, please check back soon.</p>
     <br />
@@ -8,8 +9,12 @@
 </template>
 
 <script>
+import VueTitle from './VueTitle.vue';
 export default {
   name: 'ComingSoon',
+  components: {
+    VueTitle
+  },
   data() {
     return {
     } 

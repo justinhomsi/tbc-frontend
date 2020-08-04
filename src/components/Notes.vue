@@ -1,5 +1,7 @@
 <template>
-  <div><h1>Original Patch Notes</h1>
+  <div>
+    <VueTitle title="Untitled Project - Patch Notes"></VueTitle>
+    <h1>Original Patch Notes</h1>
     <br />
     <thead><h2>Patch 2.0: Before the Storm / The Burning Crusade</h2></thead>
       <NotesTable :data="notes_data.two_zero"></NotesTable>
@@ -20,11 +22,16 @@
 
 <script>
 import NotesTable from './NotesTable.vue';
+import VueTitle from './VueTitle.vue';
 const axios = require('axios')
 var notes_data;
 
 export default {
   name: 'Notes',
+  components: {
+    NotesTable,
+    VueTitle
+  },
   data() {
     return {
       notes_data: {}
@@ -32,9 +39,6 @@ export default {
   },
   mounted() {
     this.notes_data = require('../assets/notes_data.json')
-  },
-  components: {
-    NotesTable
   }
 }
 </script>

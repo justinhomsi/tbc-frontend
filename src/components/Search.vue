@@ -1,5 +1,6 @@
 <template>
   <div>
+    <VueTitle :title="`Untitled Project Search - ${this.$route.query.q}`"></VueTitle>
     <tabs>
       <tab title="Items">
         <v-card dark>
@@ -120,6 +121,8 @@ import vuetify from 'vuetify';
 import Tab from './Tab.vue';
 import Tabs from './Tabs.vue';
 
+import VueTitle from './VueTitle.vue';
+
 const axios = require('axios')
 
 export default {
@@ -127,6 +130,7 @@ export default {
   components: {
     Tab,
     Tabs,
+    VueTitle
   },
   data() {
     return {

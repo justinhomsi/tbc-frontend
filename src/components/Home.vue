@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <VueTitle title="Untitled Project"></VueTitle>
     <v-row align="center" justify="start">
       <v-data-table
         :headers="headers"
@@ -26,10 +27,14 @@
 </template>
 
 <script>
+import VueTitle from './VueTitle.vue';
 const axios = require('axios');
 
 export default {
   name: 'Home',
+  components: {
+    VueTitle
+  },
   data() {
     return {
       bluePosts: [],
