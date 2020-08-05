@@ -4,7 +4,7 @@
 
 Frontend for an untitled, in development, World of Warcraft Community Website and Database project using Node.js, Vue.js, Vue-Router, Vuetify, and Axios.
 
-### Testing Search
+### Search Function
 Suggested search terms for testing:  
 thunder
 
