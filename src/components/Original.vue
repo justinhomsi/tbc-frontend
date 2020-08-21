@@ -13,6 +13,7 @@ export default {
     }
   },
   methods: {
+    // Retrieves patch notes from backend using route parameters
     getPatchNotes() {
       axios.get(`/notes/original/${this.$route.params.version}`)
       .then(response => {

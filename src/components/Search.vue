@@ -1,6 +1,8 @@
 <template>
   <div>
+    <!--Set page title using search query-->
     <VueTitle :title="`Untitled Project Search - ${this.$route.query.q}`"></VueTitle>
+    <!--Create tabs for each category of results using 'tabs' and 'tab' components-->
     <tabs>
       <tab title="Items">
         <v-card dark>
@@ -193,6 +195,7 @@ export default {
     }
   },
   methods: {
+    // Retrieves search results from backend using route query
     getSearchResults() {
       this.isLoading = true;
       axios.get(`/search?q=${this.$route.query.q}`)
@@ -204,6 +207,7 @@ export default {
           this.isLoading = false;
         })
     },
+    // Returns the item's type as a string using it's integer
     determineItemType(itemType) {
       switch(itemType) {
         case 0:
@@ -261,6 +265,7 @@ export default {
     }
   },
   mounted() {
+    // Calls the getSearchResults method when this component is loaded
     this.getSearchResults();
   }
 }
